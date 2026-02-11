@@ -87,7 +87,7 @@ export default function PlaylistsPage() {
               <h1 className="text-3xl font-bold text-white mb-1">
                 Your Library
               </h1>
-              <p className="text-gray-400 text-sm">Playlists created by you</p>
+              <p className="text-gray-400 text-sm">Playlists createds by you</p>
             </div>
 
             {/* Фільтр (опціонально) */}
