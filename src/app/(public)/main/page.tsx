@@ -7,7 +7,7 @@ import React, { useState } from "react";
 const TAGS = [
   "Все",
   "Аніме",
-  "Ігри",
+  "Гра",
   "Музика",
   "Live",
   "Програмування",
