@@ -69,12 +69,11 @@ export default function PlaylistsPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] font-sans selection:bg-[#24f4fa] selection:text-black">
+    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] selection:bg-[#24f4fa] selection:text-black font-sans relative">
+      {" "}
       {/* Background Mesh */}
       <div className="bg-mesh fixed inset-0 z-0 pointer-events-none" />
-
       <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
-
       <div className="flex pt-16 relative z-10">
         <Sidebar isOpen={isSidebarOpen} />
 

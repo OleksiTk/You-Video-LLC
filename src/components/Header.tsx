@@ -8,7 +8,7 @@ interface HeaderProps {
 }
 export default function Header({ toggleSidebar }: HeaderProps) {
   return (
-    <header className="fixed top-0 left-0 right-0 h-16 bg-background/95 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-4 z-50">
+    <header className="fixed top-0 left-0 right-0 h-16 bg-[#0a0a0a] text-[#ededed] backdrop-blur-md border-b border-white/5 flex items-center justify-between px-4 z-50">
       {/* Left: Logo & Toggle */}
       <div className="flex items-center gap-4">
         <button

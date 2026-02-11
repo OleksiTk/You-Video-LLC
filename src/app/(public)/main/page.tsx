@@ -92,7 +92,7 @@ export default function YouviMain() {
   const [activeTag, setActiveTag] = useState("Все");
 
   return (
-    <div className="min-h-screen bg-background text-white font-sans">
+    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] selection:bg-[#24f4fa] selection:text-black font-sans relative">
       {/* Header */}
       <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 

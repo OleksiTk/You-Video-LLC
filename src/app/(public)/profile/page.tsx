@@ -65,7 +65,8 @@ export default function ProfilePage() {
   return (
     <div>
       <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
-      <div className="min-h-screen relative overflow-hidden text-[#ededed] font-sans selection:bg-[#24f4fa] selection:text-black">
+      <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] selection:bg-[#24f4fa] selection:text-black font-sans relative">
+        {" "}
         <div className="flex pt-16">
           <Sidebar isOpen={isSidebarOpen} />
 
