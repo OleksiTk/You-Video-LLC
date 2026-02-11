@@ -11,7 +11,7 @@ export function TabButton({
     <button
       onClick={onClick}
       className={`pb-2 text-lg font-medium transition-all relative ${
-        isActive ? "text-[#24f4fa]" : "text-gray-400 hover:text-white"
+        isActive ? "text-[#24f4fa]" : "text-gray-400"
       }`}
     >
       {label}
