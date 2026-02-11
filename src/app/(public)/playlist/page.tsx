@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import Link from "next/link";
 
 // --- Мокові дані ---
 const MOCK_PLAYLISTS = [
@@ -120,79 +121,88 @@ export default function PlaylistsPage() {
 
             {/* 2. Рендер списку плейлистів */}
             {MOCK_PLAYLISTS.map((playlist) => (
-              <div
+              <Link
                 key={playlist.id}
+                href={`/playlist/${playlist.id}`}
                 className="group flex flex-col gap-3 cursor-pointer"
               >
-                {/* Обкладинка */}
-                <div className="relative aspect-video rounded-xl bg-gray-900 border border-white/5 overflow-hidden shadow-lg group-hover:shadow-[0_0_15px_rgba(36,244,250,0.15)] transition-all duration-300">
-                  {/* Якщо це Liked Videos - спеціальний градієнт */}
-                  {playlist.isSystem ? (
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-900 to-blue-900 flex items-center justify-center">
-                      <Heart
-                        size={48}
-                        className="text-white fill-white opacity-50"
+                <div
+                  key={playlist.id}
+                  className="group flex flex-col gap-3 cursor-pointer"
+                >
+                  {/* Обкладинка */}
+                  <div className="relative aspect-video rounded-xl bg-gray-900 border border-white/5 overflow-hidden shadow-lg group-hover:shadow-[0_0_15px_rgba(36,244,250,0.15)] transition-all duration-300">
+                    {/* Якщо це Liked Videos - спеціальний градієнт */}
+                    {playlist.isSystem ? (
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 to-blue-900 flex items-center justify-center">
+                        <Heart
+                          size={48}
+                          className="text-white fill-white opacity-50"
+                        />
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                      </div>
+                    ) : (
+                      <Image
+                        src={playlist.thumbnail}
+                        alt={playlist.title}
+                        fill
+                        className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                       />
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
-                    </div>
-                  ) : (
-                    <Image
-                      src={playlist.thumbnail}
-                      alt={playlist.title}
-                      fill
-                      className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                    />
-                  )}
+                    )}
 
-                  {/* Оверлей з кількістю відео (справа внизу) */}
-                  <div className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-sm px-2 py-1 rounded flex items-center gap-1.5 border border-white/10">
-                    <Music size={12} className="text-[#24f4fa]" />
-                    <span className="text-xs font-mono font-bold">
-                      {playlist.count}
-                    </span>
+                    {/* Оверлей з кількістю відео (справа внизу) */}
+                    <div className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-sm px-2 py-1 rounded flex items-center gap-1.5 border border-white/10">
+                      <Music size={12} className="text-[#24f4fa]" />
+                      <span className="text-xs font-mono font-bold">
+                        {playlist.count}
+                      </span>
+                    </div>
+
+                    {/* Overlay Play Button (Center) */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
+                      <div className="w-12 h-12 rounded-full bg-[#24f4fa] flex items-center justify-center shadow-[0_0_20px_#24f4fa] transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                        <Play
+                          size={20}
+                          className="text-black ml-1 fill-black"
+                        />
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Overlay Play Button (Center) */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
-                    <div className="w-12 h-12 rounded-full bg-[#24f4fa] flex items-center justify-center shadow-[0_0_20px_#24f4fa] transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                      <Play size={20} className="text-black ml-1 fill-black" />
+                  {/* Інфо під обкладинкою */}
+                  <div className="flex justify-between items-start px-1">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-base truncate text-white group-hover:text-[#24f4fa] transition-colors">
+                        {playlist.title}
+                      </h3>
+                      <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
+                        {playlist.privacy === "private" ? (
+                          <span className="flex items-center gap-1 bg-white/5 px-1.5 py-0.5 rounded text-gray-400">
+                            <Lock size={10} /> Private
+                          </span>
+                        ) : (
+                          <span className="flex items-center gap-1 bg-white/5 px-1.5 py-0.5 rounded text-gray-400">
+                            <Globe size={10} /> Public
+                          </span>
+                        )}
+                        {playlist.updatedAt && (
+                          <>
+                            <span>•</span>
+                            <span>{playlist.updatedAt}</span>
+                          </>
+                        )}
+                      </div>
                     </div>
+
+                    {/* Меню дій (з'являється при ховері) */}
+                    {!playlist.isSystem && (
+                      <button className="text-gray-500 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                        <MoreVertical size={18} />
+                      </button>
+                    )}
                   </div>
                 </div>
-
-                {/* Інфо під обкладинкою */}
-                <div className="flex justify-between items-start px-1">
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-base truncate text-white group-hover:text-[#24f4fa] transition-colors">
-                      {playlist.title}
-                    </h3>
-                    <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
-                      {playlist.privacy === "private" ? (
-                        <span className="flex items-center gap-1 bg-white/5 px-1.5 py-0.5 rounded text-gray-400">
-                          <Lock size={10} /> Private
-                        </span>
-                      ) : (
-                        <span className="flex items-center gap-1 bg-white/5 px-1.5 py-0.5 rounded text-gray-400">
-                          <Globe size={10} /> Public
-                        </span>
-                      )}
-                      {playlist.updatedAt && (
-                        <>
-                          <span>•</span>
-                          <span>{playlist.updatedAt}</span>
-                        </>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Меню дій (з'являється при ховері) */}
-                  {!playlist.isSystem && (
-                    <button className="text-gray-500 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                      <MoreVertical size={18} />
-                    </button>
-                  )}
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </main>

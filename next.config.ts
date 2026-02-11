@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "static.boredpanda.com", // Для картинок з BoredPanda
       },
+      {
+        protocol: "https",
+        hostname: "picsum.photos", // Для картинок з BoredPanda
+      },
     ],
   },
 };

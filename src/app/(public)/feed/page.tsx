@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import Link from "next/link";
 
 // --- Мокові дані (Розширені для формату Reddit) ---
 const CATEGORIES = [
@@ -109,97 +110,99 @@ export default function FeedPage() {
             {/* Стрічка постів (Reddit Style) */}
             <div className="flex flex-col gap-4 animate-fade-in">
               {MOCK_POSTS.map((post) => (
-                <div
-                  key={post.id}
-                  className="flex bg-neutral-900/60 backdrop-blur-md border border-white/5 rounded-xl overflow-hidden hover:border-[#24f4fa]/30 transition-colors cursor-pointer group"
-                >
-                  {/* Ліва колонка: Голосування (Desktop only) */}
-                  <div className="hidden sm:flex flex-col items-center p-3 gap-1 bg-black/20 w-12 flex-shrink-0 border-r border-white/5">
-                    <button className="text-gray-500 hover:text-[#24f4fa] transition-colors">
-                      <ArrowBigUp size={28} />
-                    </button>
-                    <span className="text-sm font-bold text-white">
-                      {formatVotes(post.votes)}
-                    </span>
-                    <button className="text-gray-500 hover:text-red-500 transition-colors">
-                      <ArrowBigDown size={28} />
-                    </button>
-                  </div>
-
-                  {/* Основний контент */}
-                  <div className="flex-1 p-3 sm:p-4">
-                    {/* Header поста (Автор, час, категорія) */}
-                    <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
-                      <div className="relative w-5 h-5 rounded-full overflow-hidden">
-                        <Image src={post.avatar} alt={post.author} fill />
-                      </div>
-                      <span className="font-bold text-white hover:underline decoration-[#24f4fa]">
-                        u/{post.author}
+                <Link href={`/feed/${post.id}`} key={post.id} className="group">
+                  <div
+                    key={post.id}
+                    className="flex bg-neutral-900/60 backdrop-blur-md border border-white/5 rounded-xl overflow-hidden hover:border-[#24f4fa]/30 transition-colors cursor-pointer group"
+                  >
+                    {/* Ліва колонка: Голосування (Desktop only) */}
+                    <div className="hidden sm:flex flex-col items-center p-3 gap-1 bg-black/20 w-12 flex-shrink-0 border-r border-white/5">
+                      <button className="text-gray-500 hover:text-[#24f4fa] transition-colors">
+                        <ArrowBigUp size={28} />
+                      </button>
+                      <span className="text-sm font-bold text-white">
+                        {formatVotes(post.votes)}
                       </span>
-                      <span>•</span>
-                      <span>{post.time}</span>
-                      {post.category && (
-                        <span className="ml-auto bg-white/10 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold text-[#24f4fa]">
-                          {post.category}
-                        </span>
-                      )}
+                      <button className="text-gray-500 hover:text-red-500 transition-colors">
+                        <ArrowBigDown size={28} />
+                      </button>
                     </div>
 
-                    {/* Заголовок (Питання/Тема) */}
-                    <h2 className="text-lg sm:text-xl font-bold text-white mb-2 leading-snug group-hover:text-[#24f4fa] transition-colors">
-                      {post.title}
-                    </h2>
+                    {/* Основний контент */}
+                    <div className="flex-1 p-3 sm:p-4">
+                      {/* Header поста (Автор, час, категорія) */}
+                      <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                        <div className="relative w-5 h-5 rounded-full overflow-hidden">
+                          <Image src={post.avatar} alt={post.author} fill />
+                        </div>
+                        <span className="font-bold text-white hover:underline decoration-[#24f4fa]">
+                          u/{post.author}
+                        </span>
+                        <span>•</span>
+                        <span>{post.time}</span>
+                        {post.category && (
+                          <span className="ml-auto bg-white/10 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold text-[#24f4fa]">
+                            {post.category}
+                          </span>
+                        )}
+                      </div>
 
-                    {/* Підзаголовок (Текст/Обговорення) */}
-                    <p className="text-sm text-gray-300 mb-4 leading-relaxed line-clamp-3">
-                      {post.subtitle}
-                    </p>
+                      {/* Заголовок (Питання/Тема) */}
+                      <h2 className="text-lg sm:text-xl font-bold text-white mb-2 leading-snug group-hover:text-[#24f4fa] transition-colors">
+                        {post.title}
+                      </h2>
 
-                    {/* Медіа (Відео/Картинка) */}
-                    <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden border border-white/10 mb-3 group-hover:shadow-[0_0_15px_rgba(36,244,250,0.1)] transition-all">
-                      <Image
-                        src={post.thumbnail}
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                      />
-                      {/* Play Button Overlay */}
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-transparent transition-colors">
-                        <div className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                          <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[14px] border-l-[#24f4fa] border-b-[8px] border-b-transparent ml-1"></div>
+                      {/* Підзаголовок (Текст/Обговорення) */}
+                      <p className="text-sm text-gray-300 mb-4 leading-relaxed line-clamp-3">
+                        {post.subtitle}
+                      </p>
+
+                      {/* Медіа (Відео/Картинка) */}
+                      <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden border border-white/10 mb-3 group-hover:shadow-[0_0_15px_rgba(36,244,250,0.1)] transition-all">
+                        <Image
+                          src={post.thumbnail}
+                          alt={post.title}
+                          fill
+                          className="object-cover"
+                        />
+                        {/* Play Button Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-transparent transition-colors">
+                          <div className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                            <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[14px] border-l-[#24f4fa] border-b-[8px] border-b-transparent ml-1"></div>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Footer (Дії: Коменти, Шер, Опції) */}
-                    <div className="flex items-center gap-1 text-gray-400">
-                      {/* Mobile Votes (Якщо приховано зліва) */}
-                      <div className="flex sm:hidden items-center gap-2 bg-white/5 px-2 py-1 rounded-full mr-2">
-                        <ArrowBigUp size={20} />
-                        <span className="text-xs font-bold">
-                          {formatVotes(post.votes)}
-                        </span>
-                        <ArrowBigDown size={20} />
+                      {/* Footer (Дії: Коменти, Шер, Опції) */}
+                      <div className="flex items-center gap-1 text-gray-400">
+                        {/* Mobile Votes (Якщо приховано зліва) */}
+                        <div className="flex sm:hidden items-center gap-2 bg-white/5 px-2 py-1 rounded-full mr-2">
+                          <ArrowBigUp size={20} />
+                          <span className="text-xs font-bold">
+                            {formatVotes(post.votes)}
+                          </span>
+                          <ArrowBigDown size={20} />
+                        </div>
+
+                        <button className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-white/10 transition-colors">
+                          <MessageSquare size={18} />
+                          <span className="text-xs font-bold">
+                            {post.comments} Comments
+                          </span>
+                        </button>
+
+                        <button className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-white/10 transition-colors">
+                          <Share2 size={18} />
+                          <span className="text-xs font-bold">Share</span>
+                        </button>
+
+                        <button className="ml-auto px-2 py-1.5 rounded-full hover:bg-white/10 transition-colors">
+                          <MoreHorizontal size={18} />
+                        </button>
                       </div>
-
-                      <button className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-white/10 transition-colors">
-                        <MessageSquare size={18} />
-                        <span className="text-xs font-bold">
-                          {post.comments} Comments
-                        </span>
-                      </button>
-
-                      <button className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-white/10 transition-colors">
-                        <Share2 size={18} />
-                        <span className="text-xs font-bold">Share</span>
-                      </button>
-
-                      <button className="ml-auto px-2 py-1.5 rounded-full hover:bg-white/10 transition-colors">
-                        <MoreHorizontal size={18} />
-                      </button>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

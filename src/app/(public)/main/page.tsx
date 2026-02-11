@@ -2,6 +2,7 @@
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import VideoCard from "@/components/VideoCard";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const TAGS = [
@@ -141,7 +142,9 @@ export default function YouviMain() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-8 gap-x-4">
               {VIDEOS.map((video) => (
-                <VideoCard key={video.id} {...video} />
+                <Link href={`/main/${video.id}`} key={video.id}>
+                  <VideoCard key={video.id} {...video} />
+                </Link>
               ))}
             </div>
           </section>
