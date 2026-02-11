@@ -2,6 +2,7 @@ import React from "react";
 import { Menu, Search, Bell, Upload, User, Monitor } from "lucide-react";
 import Button from "./Button"; // Твій компонент кнопки (або спрощений варіант нижче)
 import Image from "next/image";
+import Link from "next/link";
 interface HeaderProps {
   toggleSidebar: () => void; // Функція, яка нічого не приймає і нічого не повертає
 }
@@ -17,13 +18,15 @@ export default function Header({ toggleSidebar }: HeaderProps) {
           <Menu size={20} />
         </button>
         <div className="flex items-center gap-2 cursor-pointer">
-          {/* Logo Placeholder */}
-          <Image
-            src={"/youvideo-logo-2.png"}
-            alt="logo"
-            width={124}
-            height={124}
-          />
+          <Link href={"/main"}>
+            {/* Logo Placeholder */}
+            <Image
+              src={"/youvideo-logo-2.png"}
+              alt="logo"
+              width={124}
+              height={124}
+            />
+          </Link>
         </div>
       </div>
 
@@ -43,18 +46,12 @@ export default function Header({ toggleSidebar }: HeaderProps) {
 
       {/* Right: Actions */}
       <div className="flex items-center gap-2 sm:gap-4">
-        <button className="p-2 text-textMuted hover:text-white transition-colors hidden sm:block">
-          <Upload size={20} />
-        </button>
-        <button className="p-2 text-textMuted hover:text-white transition-colors relative">
-          <Bell size={20} />
-          <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-background"></span>
-        </button>
-
         {/* User Avatar */}
         <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-blue-500 p-[1px] cursor-pointer">
           <div className="w-full h-full rounded-full bg-surface flex items-center justify-center">
-            <User size={16} className="text-white" />
+            <Link href={"/profile"}>
+              <User size={16} className="text-white" />
+            </Link>
           </div>
         </div>
       </div>

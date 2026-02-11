@@ -30,8 +30,14 @@ export default function Sidebar({ isOpen }: SidebarProps) {
           label="Головна"
           isActive={true}
           isCollapsed={!isOpen}
+          link="/main"
         />
-        <MenuItem icon={Compass} label="Feed" isCollapsed={!isOpen} />
+        <MenuItem
+          icon={Compass}
+          label="Feed"
+          isCollapsed={!isOpen}
+          link="/feed"
+        />
 
         <div className={`my-2 border-t border-white/5 ${!isOpen && "mx-2"}`} />
 
@@ -41,22 +47,22 @@ export default function Sidebar({ isOpen }: SidebarProps) {
             Бібліотека
           </h3>
         )}
-        <MenuItem icon={Clock} label="Історія" isCollapsed={!isOpen} />
-        <MenuItem icon={ThumbsUp} label="Обране" isCollapsed={!isOpen} />
-        <MenuItem icon={Layers} label="Плейлисти" isCollapsed={!isOpen} />
+        <MenuItem
+          icon={Clock}
+          label="Історія"
+          isCollapsed={!isOpen}
+          link="/history"
+        />
+        <MenuItem
+          icon={Layers}
+          label="Плейлисти"
+          isCollapsed={!isOpen}
+          link="/playlist"
+        />
 
         <div className={`my-2 border-t border-white/5 ${!isOpen && "mx-2"}`} />
 
         {/* Categories Section */}
-        {!isOpen ? null : (
-          <h3 className="px-3 text-[11px] font-bold text-textMuted uppercase mb-1 mt-2">
-            Категорії
-          </h3>
-        )}
-        <MenuItem icon={Gamepad2} label="Ігри" isCollapsed={!isOpen} />
-        <MenuItem icon={Tv} label="Аніме" isCollapsed={!isOpen} />
-        <MenuItem icon={Film} label="Кіно" isCollapsed={!isOpen} />
-        <MenuItem icon={Music} label="Музика" isCollapsed={!isOpen} />
       </div>
     </aside>
   );

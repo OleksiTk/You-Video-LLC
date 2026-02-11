@@ -131,23 +131,6 @@ export default function YouviMain() {
           </div>
 
           {/* Tags Filter */}
-          <div className="sticky top-16 z-30 bg-background/95 backdrop-blur py-2 mb-6 -mx-2 px-2 border-b border-white/5">
-            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-              {TAGS.map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => setActiveTag(tag)}
-                  className={`px-4 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
-                    activeTag === tag
-                      ? "bg-primary text-black font-bold"
-                      : "bg-surface border border-white/10 text-gray-400 hover:bg-white/10 hover:text-white"
-                  }`}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          </div>
 
           {/* Videos Grid */}
           <section>
